@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class = 'bg-[#E1E5FE]'>
-    <div class="grid grid-cols-3 place-items-center py-8 bg-[#fefae0] drop-shadow-md">
+    <div class="grid grid-cols-3 gap-5 place-items-center py-8 bg-[#fefae0] drop-shadow-lg">
       <div>
         <p class = 'font-mono text-3xl hover:font-bold'> Budget Keeper </p>
       </div>
@@ -21,16 +21,57 @@
         </a>
       </div>
     </div>
-    <div class = 'grid grid-cols-2 place-items-center py-8'>
-      <table class = 'table-auto font-mono'>
+    <div class = 'grid grid-cols-3 gap-10 place-items-center py-10 px-20'>
+      <table class="table-auto font-mono border-separate border-2 border-slate-400 col-span-2 bg-[#FEF1E1] border-spacing-2 border-solid border-black rounded">
         <thead>
           <tr>
-            <th> Item </th>
-            <th> Quantity </th>
-            <th> Price </th>
+            <th class = 'border border-black'>Item</th>
+            <th class = 'border border-black'>Quantity</th>
+            <th class = 'border border-black'>Price ($)</th>
           </tr>
         </thead>
+        <tbody>
+          <tr>
+            <td class = 'border border-black'>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+            <td class = 'border border-black'>Malcolm Lockyer</td>
+            <td class = 'border border-black'>1961</td>
+          </tr>
+          <tr>
+            <td class = 'border border-black'>Witchy Woman</td>
+            <td class = 'border border-black'>The Eagles</td>
+            <td class = 'border border-black'>1972</td>
+          </tr>
+          <tr>
+            <td class = 'border border-black'>Shining Star</td>
+            <td class = 'border border-black'>Earth, Wind, and Fire</td>
+            <td class = 'border border-black'>1975</td>
+          </tr>
+          <tr>
+            <td class = 'border border-black'>Shining Star</td>
+            <td class = 'border border-black'>Earth, Wind, and Fire</td>
+            <td class = 'border border-black'>1975</td>
+          </tr>
+          <tr>
+            <td class = 'border border-black'>Shining Star</td>
+            <td class = 'border border-black'>Earth, Wind, and Fire</td>
+            <td class = 'border border-black'>1975</td>
+          </tr>
+        </tbody>
       </table>
+      <div class = 'bg-[#E1F8FE] font-mono px-5 border-black border-solid border-2 rounded divide-dashed divide-y divide-y-4 divide-stone-500'>
+        <h3 class = 'py-1 text-center'> == Concensus == </h3>
+        <ol class = 'list-decimal px-7 py-2'>
+          <li> Money left over: <span></span> </li>
+          <li> Total money spent: <span></span></li>
+          <li> Amount of items bought: <span></span></li>
+        </ol>
+        <div class = "py-2">
+          <strong> Exceeded budget? </strong> <span> asdfs</span>
+        </div>
+      </div>
+    </div>
+    <div class = "grid grid-cols-3 px-20 font-mono">
+
     </div>
   </body>
 

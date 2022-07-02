@@ -15,8 +15,8 @@ var viewModel = function(expense, money) {
     self.expenditures.push(
       {
         itemName : '',
-        itemQuantity: '',
-        itemPrice: ''
+        itemQuantity: '0',
+        itemPrice: '0'
       }
     )
   }

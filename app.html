@@ -3,8 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title> Pocket Manager </title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- TailWindCSS + Knockout.JS Dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src = "./Dependencies/knockout-3.5.1.js"> </script>
+
+    <!-- Business logic -->
+    <script src = "./uiLogic.js"> </script>
   </head>
   <body class = 'bg-[#E1E5FE]'>
     <div class="grid grid-cols-3 gap-5 place-items-center py-8 bg-[#fefae0] drop-shadow-lg">
@@ -13,7 +18,7 @@
       </div>
       <div>
         <label for = 'budget' class = 'font-mono text-lg'> Your Budget: </label>
-        <input data-bind = "" id = 'budget' class = 'border-solid border-2'> </input>
+        <input data-bind = "value: totalMoney" id = 'budget' class = 'border-solid border-2'> </input>
       </div>
       <div>
         <a target = '_blank' href = '/' class = 'font-mono hover:ease-in ease-out duration-150 transition'>
@@ -21,8 +26,9 @@
         </a>
       </div>
     </div>
-    <div class = 'grid grid-cols-3 gap-10 place-items-center py-10 px-20'>
-      <table class="table-auto font-mono border-separate border-2 border-slate-400 col-span-2 bg-[#FEF1E1] border-spacing-2 border-solid border-black rounded">
+    <div class = 'grid grid-cols-3 gap-10 place-items-center pt-10 px-20'>
+      <table class="table-auto font-mono border-separate border-2 border-slate-400 col-span-2 bg-[#FEF1E1] border-spacing-2 border-solid border-black rounded"
+      data-bind = "simpleGrid: expenseModel">
         <thead>
           <tr>
             <th class = 'border border-black'>Item</th>
@@ -32,29 +38,9 @@
         </thead>
         <tbody>
           <tr>
-            <td class = 'border border-black'>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-            <td class = 'border border-black'>Malcolm Lockyer</td>
-            <td class = 'border border-black'>1961</td>
-          </tr>
-          <tr>
-            <td class = 'border border-black'>Witchy Woman</td>
-            <td class = 'border border-black'>The Eagles</td>
-            <td class = 'border border-black'>1972</td>
-          </tr>
-          <tr>
-            <td class = 'border border-black'>Shining Star</td>
-            <td class = 'border border-black'>Earth, Wind, and Fire</td>
-            <td class = 'border border-black'>1975</td>
-          </tr>
-          <tr>
-            <td class = 'border border-black'>Shining Star</td>
-            <td class = 'border border-black'>Earth, Wind, and Fire</td>
-            <td class = 'border border-black'>1975</td>
-          </tr>
-          <tr>
-            <td class = 'border border-black'>Shining Star</td>
-            <td class = 'border border-black'>Earth, Wind, and Fire</td>
-            <td class = 'border border-black'>1975</td>
+            <td class = 'border border-black'> <input data-binding = "value: itemName"> </input> </td>
+            <td class = 'border border-black'> <input data-binding = "value: itemQuantity"> </input> </td>
+            <td class = 'border border-black'> <input data-binding = "value: itemPrice"> </input> </td>
           </tr>
         </tbody>
       </table>
@@ -62,20 +48,18 @@
         <h3 class = 'py-1 text-center'> == Concensus == </h3>
         <ol class = 'list-decimal px-7 py-2'>
           <li> Money left over: <span></span> </li>
-          <li> Total money spent: <span></span></li>
-          <li> Amount of items bought: <span></span></li>
+          <li> Total money spent: <span data-binding = ""></span></li>
+          <li> Amount of items bought: <span data-binding = "text: finalConsensus"></span></li>
         </ol>
         <div class = "py-2">
           <strong> Exceeded budget? </strong> <span> asdfs</span>
         </div>
       </div>
     </div>
-    <div class = "grid grid-cols-3 px-20 font-mono">
-
+    <div class = "inline-grid grid-cols-3 font-mono place-items-center px-16">
+      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black transition duration-150 hover:ease-in-out"> Add item! </button>
+      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black"> Tally Summary Statistics! </button>
+      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black"> Sort items! </button>
     </div>
   </body>
-
-  <script type="text/javascript">
-
-  </script>
 </html>

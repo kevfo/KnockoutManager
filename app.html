@@ -27,8 +27,7 @@
       </div>
     </div>
     <div class = 'grid grid-cols-3 gap-10 place-items-center pt-10 px-20'>
-      <table class="table-auto font-mono border-separate border-2 border-slate-400 col-span-2 bg-[#FEF1E1] border-spacing-3 border-solid border-black rounded"
-      data-bind = "visible: expenditures().length > 0">
+      <table class="table-auto font-mono border-separate border-2 border-slate-400 col-span-2 bg-[#FEF1E1] border-spacing-3 border-solid border-black rounded">
         <thead>
           <tr>
             <th class = 'border border-black'>Item</th>
@@ -42,7 +41,7 @@
             <td class = 'border border-black'> <input data-bind = "value: itemName"> </input> </td>
             <td class = 'border border-black'> <input data-bind = "value: itemQuantity"> </input> </td>
             <td class = 'border border-black'> <input data-bind = "value: itemPrice"> </input> </td>
-            <td class = 'border border-black bg-slate-200 text-sm text-center'> <button data-bind="{enable: expenses.length > 1, click: $root.removeItem}"> Delete item! </button></td>
+            <td class = 'border border-black bg-slate-200 text-sm text-center'> <button data-bind="{click: $root.removeItem}"> Delete item! </button></td>
           </tr>
         </tbody>
       </table>
@@ -54,19 +53,23 @@
           <li> Amount of items bought: <span data-bind = "text: itemsBought"></span></li>
         </ol>
         <div class = "py-2">
-          <strong> Exceeded budget? </strong> <span data-bind = "text: finalConsensus"> asdfs</span>
+          <strong> Exceeded budget? </strong> <span data-bind = "text: finalConsensus"> </span>
         </div>
       </div>
     </div>
-    <div class = "inline-grid grid-cols-3 gap-10 font-mono place-items-center px-5 pt-2">
+    <div class = "inline-grid grid-cols-3 gap-10 font-mono place-items-center px-11 pt-2">
       <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black" data-bind = "click: addItemToTable"> Add item! </button>
-      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black" data-bind = "click: tallyStats"> Tally Summary Statistics! </button>
-      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black" data-bind = "click: sortByNames"> Sort items! </button>
+      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black" data-bind = "click: sortByQuantity"> Sort by quantity! </button>
+      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black" data-bind = "click: sortByPrice"> Sort by price! </button>
     </div>
   </body>
 
   <!-- Run uiLogic here: -->
   <script type="text/javascript">
-    ko.applyBindings(new viewModel('Snickers bar', 2, 2, 30));
+    let dummyData = [
+      {itemName: 'Item name', itemQuantity: '0', itemPrice: '0'}
+    ];
+
+    ko.applyBindings(new viewModel(dummyData, 20));
   </script>
 </html>

@@ -43,7 +43,7 @@ var viewModel = function(expense, money) {
     self.expenditures().forEach(item => {
       initial -= parseFloat(item.itemPrice);
     })
-    return initial > 0 ? `$${initial.toFixed(2)}` : '0$';
+    return initial > 0 ? `$` + Math.round(initial, 2) : '0$';
   }, self);
 
   self.moneyGone = ko.computed(function() {
@@ -57,12 +57,16 @@ var viewModel = function(expense, money) {
   self.itemsBought = ko.computed(function() {
     let itemCount = 0;
     self.expenditures().forEach(item => {itemCount++});
-    return itemCount + ' items';
+    return itemCount + ' item(s)';
   }, self);
 
   self.finalConsensus = ko.computed(function() {
-    return self.moneyGone > self.totalMoney() ? "Yes :(" : "No :)";
-  })
+    let totalSpent = 0;
+    self.expenditures().forEach(item => {
+      totalSpent += parseFloat(item.itemPrice) * parseFloat(item.itemQuantity);
+    })
+    return totalSpent > self.totalMoney() ? "Yes :(" : "No :)";
+  }, self);
 
   // If we don't have any items, display this message:
   self.noItems = ko.computed(function() {
@@ -71,4 +75,9 @@ var viewModel = function(expense, money) {
   self.hasItems = ko.computed(function() {
     return self.expenditures().length > 0 ? true : false;
   })
+
+  // Do we need this?
+  self.tallyStats = function() {
+    
+  };
 }

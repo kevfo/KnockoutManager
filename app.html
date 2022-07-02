@@ -21,14 +21,14 @@
         <input data-bind = "value: totalMoney" id = 'budget' class = 'border-solid border-2 text-center'> </input>
       </div>
       <div>
-        <a target = '_blank' href = '/' class = 'font-mono hover:ease-in ease-out duration-150 transition'>
+        <a target = '_blank' href = 'https://github.com/kevfo/KnockoutManager' class = 'font-mono hover:text-xl'>
           View on GitHub
         </a>
       </div>
     </div>
-    <div class = 'grid grid-cols-3 gap-10 place-items-center pt-10 px-20'>
+    <div class = 'grid grid-cols-3 gap-10 place-items-center pt-8 px-20'>
       <div class = 'font-mono col-span-2 px-10 border border-solid border-black rounded py-10 border-2 bg-[#FEF1E1]' data-bind = 'visible: noItems'>
-        <h3> Click on the "Add Item!" button to get started! </h3>
+        <h3> Click on the "Add Item to table!" button to get started! </h3>
       </div>
       <table class="text-center table-auto font-mono border-separate border-2 border-slate-400 col-span-2 bg-[#FEF1E1] border-spacing-3 border-solid border-black rounded"
       data-bind="visible: hasItems">
@@ -45,33 +45,48 @@
             <td class = 'border border-black'> <input data-bind = "value: itemName" class = "text-center"> </input> </td>
             <td class = 'border border-black'> <input data-bind = "value: itemQuantity" class = "text-center"> </input> </td>
             <td class = 'border border-black'> <input data-bind = "value: itemPrice" class = 'text-center'> </input> </td>
-            <td class = 'border border-black bg-slate-200 text-sm text-center'> <button data-bind="{click: $root.removeItem}"> Delete item! </button></td>
+            <td class = 'border border-black bg-slate-200 hover:bg-slate-300 text-sm text-center'> <button data-bind="{click: $root.removeItem}"> Delete item! </button></td>
           </tr>
         </tbody>
       </table>
       <div class = 'bg-[#E1F8FE] font-mono px-5 border-black border-solid border-2 rounded divide-dashed divide-y divide-y-4 divide-stone-500'>
-        <h3 class = 'py-1 text-center'> == Concensus == </h3>
-        <ol class = 'list-decimal px-7 py-2'>
+        <h3 class = 'py-2 text-center'> == Concensus == </h3>
+        <ol class = 'list-decimal px-6 py-3'>
           <li> Money left over: <span data-bind = 'text: leftOver'></span> </li>
           <li> Total money spent: <span data-bind = "text: moneyGone"></span></li>
           <li> Amount of items bought: <span data-bind = "text: itemsBought"></span></li>
+          <li> <strong> Exceeded budget? </strong> <strong> <span data-bind = "text: finalConsensus"> </span> </strong> </li>
         </ol>
-        <div class = "py-2">
-          <strong> Exceeded budget? </strong> <span data-bind = "text: finalConsensus"> </span>
+        <h3 class = 'text-center py-2'> == Controls == </h3>
+        <div class = "inline-grid grid-cols-3 gap-1 font-mono place-items-center py-4">
+          <button class = "text-xs bg-[#C0F1FD] hover:bg-[#62DCFA] px-1 py-1 border border-solid border-black" data-bind = "click: addItemToTable"> Add item to table! </button>
+          <!-- <button class = "text-xs bg-[#C0F1FD] hover:bg-[#62DCFA] px-1 py-1 border border-solid border-black" data-bind = "click: sortByQuantity"> Sort by quantity! </button> -->
+          <button class = "text-xs bg-[#C0F1FD] hover:bg-[#62DCFA] px-1 py-1 border border-solid border-black" data-bind = "click: tallyStats"> Tally Stats! </button>
+
+          <button class = "text-xs bg-[#C0F1FD] hover:bg-[#62DCFA] px-1 py-1 border border-solid border-black" data-bind = "click: sortByPrice"> Sort by price! </button>
         </div>
+        <h3 class = 'py-2 text-center'> == How do I begin? == </h3>
+        <ol class = 'list-decimal px-6 py-3'>
+          <li> Click on the "Add item!" button </li>
+          <li> Edit the table accordingly! </li>
+          <li> Check this pane on the right! </li>
+        </ol>
       </div>
     </div>
-    <div class = "inline-grid grid-cols-3 gap-10 font-mono place-items-center px-11 pt-2">
-      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black" data-bind = "click: addItemToTable"> Add item! </button>
-      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black" data-bind = "click: sortByQuantity"> Sort by quantity! </button>
-      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black" data-bind = "click: sortByPrice"> Sort by price! </button>
+    <br>
+    <!--
+    <div class = "inline-grid grid-cols-3 gap-10 font-mono place-items-center pl-24">
+      <button class = "bg-[#E1F8FE] hover:bg-[#C0F1FD] px-2 py-2 border border-solid border-black" data-bind = "click: addItemToTable"> Add item! </button>
+      <button class = "bg-[#E1F8FE] hover:bg-[#C0F1FD] px-2 py-2 border border-solid border-black" data-bind = "click: sortByQuantity"> Sort by quantity! </button>
+      <button class = "bg-[#E1F8FE] hover:bg-[#C0F1FD] px-2 py-2 border border-solid border-black" data-bind = "click: sortByPrice"> Sort by price! </button>
     </div>
+    -->
   </body>
 
   <!-- Run uiLogic here: -->
   <script type="text/javascript">
     let dummyData = [
-      {itemName: 'Item name', itemQuantity: '0', itemPrice: '0'}
+      {itemName: '', itemQuantity: '0', itemPrice: '0'}
     ];
 
     ko.applyBindings(new viewModel(dummyData, 20));

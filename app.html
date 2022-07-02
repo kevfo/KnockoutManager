@@ -18,7 +18,7 @@
       </div>
       <div>
         <label for = 'budget' class = 'font-mono text-lg'> Your Budget ($): </label>
-        <input data-bind = "value: totalMoney" id = 'budget' class = 'border-solid border-2'> </input>
+        <input data-bind = "value: totalMoney" id = 'budget' class = 'border-solid border-2 text-center'> </input>
       </div>
       <div>
         <a target = '_blank' href = '/' class = 'font-mono hover:ease-in ease-out duration-150 transition'>
@@ -27,7 +27,11 @@
       </div>
     </div>
     <div class = 'grid grid-cols-3 gap-10 place-items-center pt-10 px-20'>
-      <table class="table-auto font-mono border-separate border-2 border-slate-400 col-span-2 bg-[#FEF1E1] border-spacing-3 border-solid border-black rounded">
+      <div class = 'font-mono col-span-2 px-10 border border-solid border-black rounded py-10 border-2 bg-[#FEF1E1]' data-bind = 'visible: noItems'>
+        <h3> Click on the "Add Item!" button to get started! </h3>
+      </div>
+      <table class="text-center table-auto font-mono border-separate border-2 border-slate-400 col-span-2 bg-[#FEF1E1] border-spacing-3 border-solid border-black rounded"
+      data-bind="visible: hasItems">
         <thead>
           <tr>
             <th class = 'border border-black'>Item</th>
@@ -38,9 +42,9 @@
         </thead>
         <tbody data-bind = "foreach: expenditures">
           <tr>
-            <td class = 'border border-black'> <input data-bind = "value: itemName"> </input> </td>
-            <td class = 'border border-black'> <input data-bind = "value: itemQuantity"> </input> </td>
-            <td class = 'border border-black'> <input data-bind = "value: itemPrice"> </input> </td>
+            <td class = 'border border-black'> <input data-bind = "value: itemName" class = "text-center"> </input> </td>
+            <td class = 'border border-black'> <input data-bind = "value: itemQuantity" class = "text-center"> </input> </td>
+            <td class = 'border border-black'> <input data-bind = "value: itemPrice" class = 'text-center'> </input> </td>
             <td class = 'border border-black bg-slate-200 text-sm text-center'> <button data-bind="{click: $root.removeItem}"> Delete item! </button></td>
           </tr>
         </tbody>

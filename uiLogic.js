@@ -63,4 +63,12 @@ var viewModel = function(expense, money) {
   self.finalConsensus = ko.computed(function() {
     return self.moneyGone > self.totalMoney() ? "Yes :(" : "No :)";
   })
+
+  // If we don't have any items, display this message:
+  self.noItems = ko.computed(function() {
+    return self.expenditures().length > 0 ? false : true;
+  })
+  self.hasItems = ko.computed(function() {
+    return self.expenditures().length > 0 ? true : false;
+  })
 }

@@ -17,7 +17,7 @@
         <p class = 'font-mono text-3xl hover:font-bold'> Budget Keeper </p>
       </div>
       <div>
-        <label for = 'budget' class = 'font-mono text-lg'> Your Budget: </label>
+        <label for = 'budget' class = 'font-mono text-lg'> Your Budget ($): </label>
         <input data-bind = "value: totalMoney" id = 'budget' class = 'border-solid border-2'> </input>
       </div>
       <div>
@@ -27,39 +27,46 @@
       </div>
     </div>
     <div class = 'grid grid-cols-3 gap-10 place-items-center pt-10 px-20'>
-      <table class="table-auto font-mono border-separate border-2 border-slate-400 col-span-2 bg-[#FEF1E1] border-spacing-2 border-solid border-black rounded"
-      data-bind = "simpleGrid: expenseModel">
+      <table class="table-auto font-mono border-separate border-2 border-slate-400 col-span-2 bg-[#FEF1E1] border-spacing-3 border-solid border-black rounded"
+      data-bind = "visible: expenditures().length > 0">
         <thead>
           <tr>
             <th class = 'border border-black'>Item</th>
             <th class = 'border border-black'>Quantity</th>
             <th class = 'border border-black'>Price ($)</th>
+            <th></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-bind = "foreach: expenditures">
           <tr>
-            <td class = 'border border-black'> <input data-binding = "value: itemName"> </input> </td>
-            <td class = 'border border-black'> <input data-binding = "value: itemQuantity"> </input> </td>
-            <td class = 'border border-black'> <input data-binding = "value: itemPrice"> </input> </td>
+            <td class = 'border border-black'> <input data-bind = "value: itemName"> </input> </td>
+            <td class = 'border border-black'> <input data-bind = "value: itemQuantity"> </input> </td>
+            <td class = 'border border-black'> <input data-bind = "value: itemPrice"> </input> </td>
+            <td class = 'border border-black bg-slate-200 text-sm text-center'> <button data-bind="{enable: expenses.length > 1, click: $root.removeItem}"> Delete item! </button></td>
           </tr>
         </tbody>
       </table>
       <div class = 'bg-[#E1F8FE] font-mono px-5 border-black border-solid border-2 rounded divide-dashed divide-y divide-y-4 divide-stone-500'>
         <h3 class = 'py-1 text-center'> == Concensus == </h3>
         <ol class = 'list-decimal px-7 py-2'>
-          <li> Money left over: <span></span> </li>
-          <li> Total money spent: <span data-binding = ""></span></li>
-          <li> Amount of items bought: <span data-binding = "text: finalConsensus"></span></li>
+          <li> Money left over: <span data-bind = 'text: leftOver'></span> </li>
+          <li> Total money spent: <span data-bind = "text: moneyGone"></span></li>
+          <li> Amount of items bought: <span data-bind = "text: itemsBought"></span></li>
         </ol>
         <div class = "py-2">
-          <strong> Exceeded budget? </strong> <span> asdfs</span>
+          <strong> Exceeded budget? </strong> <span data-bind = "text: finalConsensus"> asdfs</span>
         </div>
       </div>
     </div>
-    <div class = "inline-grid grid-cols-3 font-mono place-items-center px-16">
-      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black transition duration-150 hover:ease-in-out"> Add item! </button>
-      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black"> Tally Summary Statistics! </button>
-      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black"> Sort items! </button>
+    <div class = "inline-grid grid-cols-3 gap-10 font-mono place-items-center px-5 pt-2">
+      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black" data-bind = "click: addItemToTable"> Add item! </button>
+      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black" data-bind = "click: tallyStats"> Tally Summary Statistics! </button>
+      <button class = "bg-[#E1F8FE] px-2 py-2 border border-solid border-black" data-bind = "click: sortByNames"> Sort items! </button>
     </div>
   </body>
+
+  <!-- Run uiLogic here: -->
+  <script type="text/javascript">
+    ko.applyBindings(new viewModel('Snickers bar', 2, 2, 30));
+  </script>
 </html>

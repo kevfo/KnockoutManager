@@ -41,7 +41,7 @@ var viewModel = function(expense, money) {
   self.leftOver = ko.computed(function() {
     let initial = self.totalMoney();
     self.expenditures().forEach(item => {
-      initial -= parseInt(item.itemPrice);
+      initial -= parseFloat(item.itemPrice);
     })
     return initial > 0 ? `$${initial.toFixed(2)}` : '0$';
   }, self);
@@ -49,7 +49,7 @@ var viewModel = function(expense, money) {
   self.moneyGone = ko.computed(function() {
     let totalSpent = 0;
     self.expenditures().forEach(item => {
-      totalSpent += parseInt(item.itemPrice) * parseInt(item.itemQuantity);
+      totalSpent += parseFloat(item.itemPrice) * parseFloat(item.itemQuantity);
     });
     return `$${totalSpent}`;
   }, self);

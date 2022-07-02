@@ -1,5 +1,5 @@
 // All of our user's expenditures.
-var expenses = []
+var expenses = [{name: 'Mars Bar', quantity: 1, price: 0.5}]
 
 var viewModel = function(name, quantity, price, money) {
   var self = this;
@@ -28,19 +28,41 @@ var viewModel = function(name, quantity, price, money) {
     });
   }
 
-  // Making a new grid view model:
-  self.expenseModel = new ko.simpleGrid.viewModel({
-    data: self.expenditures(),
-    columns: [
-      { headerText : "Item Name", rowText : 'name'},
-      { headerText : 'Quantity', rowText : 'quantity'},
-      { headerText : 'Price', rowText : function(item) {return `SGD${item.price.toFixed(2)}`}}
-    ],
-    pageSize: 5
-  })
+  self.removeItem = function(item) {
+    self.expenditures.remove(item);
+  }
 
   // Summary statistics to let the user know how good / bad they are...
 
-}
+  self.tallyStats = function() {
+    self.leftOver = ko.computed(function() {
+      let initial = self.totalMoney();
+      self.expenditures().forEach(item => {
+        initial -= item.price;
+      })
+      return initial >= 0 ? initial.toFixed(2) : 0;
+    }, self);
 
-ko.applyBindings(new viewModel('Sample Item', 'Sample Quantity', 'Sample Price', 20));
+    self.moneySpent = ko.computed(function() {
+      let totalSpent = 0;
+      self.expenditures().forEach(item => {
+        totalSpent += item.price;
+      });
+      return totalSpent;
+    }, self);
+
+    self.itemsBought = ko.computed(function() {
+      let itemCount = 0;
+      self.expenditures().forEach(item => {itemCount++});
+      return itemCount;
+    }, self);
+
+    return {first: self.leftOver, second: self.moneySpent, third: self.itemsBought};
+  }
+
+  let summaryStats = self.tallyStats();
+  self.leftOver = summaryStats.first;
+  self.moneySpent = summaryStats.second;
+  self.itemsBought = summaryStats.third;
+  
+}

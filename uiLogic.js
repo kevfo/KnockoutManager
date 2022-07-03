@@ -41,7 +41,7 @@ var viewModel = function(expense, money) {
   self.leftOver = ko.computed(function() {
     let initial = self.totalMoney();
     self.expenditures().forEach(item => {
-      initial -= parseFloat(item.itemPrice);
+      initial -= parseFloat(item.itemPrice) * parseFloat(item.itemQuantity);
     })
     return initial > 0 ? `$` + Math.round(initial, 2) : '0$';
   }, self);
@@ -77,7 +77,25 @@ var viewModel = function(expense, money) {
   })
 
   // Do we need this?
-  self.tallyStats = function() {
-    
-  };
+  self.moneyGone = ko.computed(function() {
+    let totalSpent = 0;
+    self.expenditures().forEach(item => {
+      totalSpent += parseFloat(item.itemPrice) * parseFloat(item.itemQuantity);
+    });
+    return `$${totalSpent}`;
+  }, self);
+
+  self.itemsBought = ko.computed(function() {
+    let itemCount = 0;
+    self.expenditures().forEach(item => {itemCount++});
+    return itemCount + ' item(s)';
+  }, self);
+
+  self.finalConsensus = ko.computed(function() {
+    let totalSpent = 0;
+    self.expenditures().forEach(item => {
+      totalSpent += parseFloat(item.itemPrice) * parseFloat(item.itemQuantity);
+    })
+    return totalSpent > self.totalMoney() ? "Yes :(" : "No :)";
+  }, self);
 }
